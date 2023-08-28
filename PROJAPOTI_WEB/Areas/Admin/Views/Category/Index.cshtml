@@ -1,0 +1,50 @@
+﻿@model List<Category>
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4 class="text-white py-2 text-uppercase">Category List</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-md-6 p-0">
+            </div>
+             <div class="col-md-6 text-end">
+                  <a asp-controller="Category" asp-action="Create" class="btn btn-outline-info"><i class="bi bi-plus-circle"></i> Create Category</a>
+             </div>
+        </div>
+        <div class="row pt-4">
+            <table class="table table-bordered table-striped">
+                <thead>
+                     <tr>
+                         <th>Category Name</th>
+                         <th>Display Order</th>
+                         <th>#</th>
+                     </tr>
+                </thead>
+                <tbody>
+                     @foreach (var item in Model.OrderBy(u => u.DisplayOrder))
+                     {
+                      <tr>
+                          <td>@item.Name</td>
+                          <td>@item.DisplayOrder</td>
+                          <td>
+                              <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary mx-2"><i class="bi bi-pencil-square text-success"></i> Edit</a>
+                              <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger mx-2"><i class="bi bi-trash"></i> Delete</a>
+                          </td>
+                      </tr>
+                     }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+}
